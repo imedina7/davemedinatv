@@ -9,7 +9,7 @@
 import SocialLinks from './components/SocialLinks.vue'
 
 export default {
-  name: 'App',
+  name: 'DaveMedinaTV',
   components: {
     SocialLinks
   }
