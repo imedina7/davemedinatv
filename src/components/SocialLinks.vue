@@ -1,6 +1,10 @@
 <template>
   <div class="links">
-
+    <ul>
+      <li><a href="https://www.facebook.com/themarciano">Facebook</a></li>
+      <li><a href="https://www.instagram.com/davemedina.tv">Instagram</a></li>
+      <li><a href="https://www.youtube.com/DaveMedinaTV">YouTube</a></li>
+    </ul>
   </div>
 </template>
 
@@ -27,6 +31,10 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #a7a7a7;
+  text-decoration: none;
+}
+a:hover {
+  color:#DDDDDD;
 }
 </style>
