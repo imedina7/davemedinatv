@@ -1,9 +1,9 @@
 <template>
   <div class="links">
     <ul>
-      <li><a href="https://www.facebook.com/themarciano">Facebook</a></li>
-      <li><a href="https://www.instagram.com/davemedina.tv">Instagram</a></li>
       <li><a href="https://www.youtube.com/DaveMedinaTV">YouTube</a></li>
+      <li><a href="https://www.instagram.com/davemedina.tv">Instagram</a></li>
+      <li><a href="https://www.twitter.com/davemedinatv">Twitter</a></li>
     </ul>
   </div>
 </template>
