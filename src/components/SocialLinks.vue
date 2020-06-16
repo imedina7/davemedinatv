@@ -4,6 +4,7 @@
       <li><a href="https://www.youtube.com/DaveMedinaTV">YouTube</a></li>
       <li><a href="https://www.instagram.com/davemedina.tv">Instagram</a></li>
       <li><a href="https://www.twitter.com/davemedinatv">Twitter</a></li>
+      <li><a href="https://www.facebook.com/davemedina.tv">Facebook</a></li>
     </ul>
   </div>
 </template>
