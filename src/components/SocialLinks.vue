@@ -1,10 +1,10 @@
 <template>
   <div class="links">
     <ul>
-      <li><a href="https://www.youtube.com/DaveMedinaTV">YouTube</a></li>
-      <li><a href="https://www.instagram.com/davemedina.tv">Instagram</a></li>
-      <li><a href="https://www.twitter.com/davemedinatv">Twitter</a></li>
-      <li><a href="https://www.facebook.com/davemedina.tv">Facebook</a></li>
+      <li><a href="https://www.youtube.com/DaveMedinaTV"><font-awesome-icon :icon="['fab', 'youtube']" /></a></li>
+      <li><a href="https://www.instagram.com/davemedina.tv"><font-awesome-icon :icon="['fab', 'instagram']" /></a></li>
+      <li><a href="https://www.twitter.com/davemedinatv"><font-awesome-icon :icon="['fab', 'twitter']" /></a></li>
+      <li><a href="https://www.facebook.com/davemedina.tv"><font-awesome-icon :icon="['fab', 'facebook']" /></a></li>
     </ul>
   </div>
 </template>
@@ -29,7 +29,7 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 20px;
 }
 a {
   color: #a7a7a7;
@@ -37,5 +37,8 @@ a {
 }
 a:hover {
   color:#DDDDDD;
+}
+div.links ul li > a {
+  font-size: 20pt;
 }
 </style>
