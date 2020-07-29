@@ -5,6 +5,7 @@
       <li><a href="https://www.instagram.com/davemedina.tv"><font-awesome-icon :icon="['fab', 'instagram']" /></a></li>
       <li><a href="https://www.twitter.com/davemedinatv"><font-awesome-icon :icon="['fab', 'twitter']" /></a></li>
       <li><a href="https://www.facebook.com/davemedina.tv"><font-awesome-icon :icon="['fab', 'facebook']" /></a></li>
+      <li><a href="https://www.mixcloud.com/davemedinatv"><font-awesome-icon :icon="['fab', 'mixcloud']" /></a></li>
     </ul>
   </div>
 </template>
