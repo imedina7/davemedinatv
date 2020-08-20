@@ -5,7 +5,7 @@ const app = express()
 app.use('/', serveStatic(path.join(__dirname, '../dist')))
 const port = process.env.PORT || 8080
 
-const liveUrl = process.env.LIVE_YOUTUBE_URL
+const liveUrl = process.env.LIVE_YOUTUBE_URL || null
 
 app.use('/api/youtube', (req, res, next) => {
     console.log(req)
