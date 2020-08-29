@@ -7,10 +7,14 @@ const port = process.env.PORT || 8080
 
 const liveUrl = process.env.LIVE_YOUTUBE_URL || null
 
-app.use('/api/youtube', (req, res, next) => {
+app.use('/api/liveStatus', (req, res, next) => {
     console.log(req)
+
+
     const jsonResponse = { liveUrl }
+
     res.send(JSON.stringify(jsonResponse))
+
     next()
 })
 
