@@ -1,11 +1,11 @@
 <template>
-  <div class="links">
+  <div class="links" aria-label="Redes Sociales">
     <ul>
-      <li><a href="https://www.youtube.com/DaveMedinaTV"><font-awesome-icon :icon="['fab', 'youtube']" /></a></li>
-      <li><a href="https://www.instagram.com/davemedina.tv"><font-awesome-icon :icon="['fab', 'instagram']" /></a></li>
-      <li><a href="https://www.twitter.com/davemedinatv"><font-awesome-icon :icon="['fab', 'twitter']" /></a></li>
-      <li><a href="https://www.facebook.com/davemedina.tv"><font-awesome-icon :icon="['fab', 'facebook']" /></a></li>
-      <li><a href="https://www.mixcloud.com/davemedinatv"><font-awesome-icon :icon="['fab', 'mixcloud']" /></a></li>
+      <li><a aria-label="Youtube" href="https://www.youtube.com/DaveMedinaTV"><font-awesome-icon :icon="['fab', 'youtube']" /></a></li>
+      <li><a aria-label="Instagram" href="https://www.instagram.com/davemedina.tv"><font-awesome-icon :icon="['fab', 'instagram']" /></a></li>
+      <li><a aria-label="Twitter" href="https://www.twitter.com/davemedinatv"><font-awesome-icon :icon="['fab', 'twitter']" /></a></li>
+      <li><a aria-label="Facebook" href="https://www.facebook.com/davemedina.tv"><font-awesome-icon :icon="['fab', 'facebook']" /></a></li>
+      <li><a aria-label="Mixcloud" href="https://www.mixcloud.com/davemedinatv"><font-awesome-icon :icon="['fab', 'mixcloud']" /></a></li>
     </ul>
   </div>
 </template>
@@ -27,10 +27,12 @@ h3 {
 ul {
   list-style-type: none;
   padding: 0;
+  display: inline-block;
+  width: 100%;
+  display: flex;
 }
 li {
-  display: inline-block;
-  margin: 0 20px;
+  flex-grow: 1;
 }
 a {
   color: #a7a7a7;
@@ -38,6 +40,9 @@ a {
 }
 a:hover {
   color:#DDDDDD;
+}
+div.links {
+  width: 100%;
 }
 div.links ul li > a {
   font-size: 20pt;

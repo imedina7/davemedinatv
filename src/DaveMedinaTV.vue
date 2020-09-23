@@ -1,6 +1,6 @@
 <template>
   <div id="davemedinatv">
-    <img id="dave_logo" src="./assets/dave_logo.svg">
+    <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo"/>
     <SocialLinks />
   </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
 
 import SocialLinks from './components/SocialLinks.vue'
+import StaticLogo from './components/StaticLogo.vue'
 
 import axios from 'axios'
 
@@ -15,7 +16,8 @@ export default {
   name: 'DaveMedinaTV',
 
   components: {
-    SocialLinks
+    SocialLinks,
+    StaticLogo
   },
 
   props: {
@@ -44,12 +46,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
 }
-#dave_logo {
-  width: 70%
+@media (min-width: 320px) {
 }
-
+@media (min-width: 568px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 1024px) {
+}
 </style>
