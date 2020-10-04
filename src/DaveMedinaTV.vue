@@ -56,12 +56,24 @@ body {
   justify-content: center;
   flex-flow: column;
 }
+.logo-wrap {
+  width: 100%;
+}
 @media (min-width: 320px) {
 }
 @media (min-width: 568px) {
+  .logo-wrap {
+    width: 80%;
+  }
 }
 @media (min-width: 768px) {
+  .logo-wrap {
+    width: 75%;
+  }
 }
 @media (min-width: 1024px) {
+  .logo-wrap {
+    width: 70%;
+  }
 }
 </style>
