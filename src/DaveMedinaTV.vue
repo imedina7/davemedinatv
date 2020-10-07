@@ -48,6 +48,7 @@ export default {
 
 body {
   background-color: #000000;
+  font-size: 15px;
 }
 #davemedinatv {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -76,6 +77,9 @@ body {
   }
 }
 @media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
   .logo-wrap {
     width: 75%;
   }

@@ -45,6 +45,6 @@ div.links {
   width: 100%;
 }
 div.links ul li > a {
-  font-size: 20pt;
+  font-size: 2em;
 }
 </style>
