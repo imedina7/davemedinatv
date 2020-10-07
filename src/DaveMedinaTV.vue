@@ -1,5 +1,5 @@
 <template>
-  <div id="davemedinatv">
+  <div id="davemedinatv" v-on:load="main">
     <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo"/>
     <SocialLinks />
   </div>
@@ -29,8 +29,17 @@ export default {
     fetchLiveStatus: () => {
       axios('/api/liveStatus').then((response) => {
         console.log(response)
+      }).catch(err => {
+        console.log('Live status request failed.\nError object:')
+        console.log(err)
       })
+    },
+    main: function () {
+      this.fetchLiveStatus()
     }
+  },
+  mounted: function () {
+    this.main()
   }
 }
 </script>
