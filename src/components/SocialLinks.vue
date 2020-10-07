@@ -32,7 +32,12 @@ ul {
   display: flex;
 }
 li {
+<<<<<<< HEAD
   flex-grow: 1;
+=======
+  display: inline-block;
+  margin: 0 20px;
+>>>>>>> 6de39500704817d0bf2d9363b2619c1e1cbad472
 }
 a {
   color: #a7a7a7;
@@ -41,9 +46,12 @@ a {
 a:hover {
   color:#DDDDDD;
 }
+<<<<<<< HEAD
 div.links {
   width: 100%;
 }
+=======
+>>>>>>> 6de39500704817d0bf2d9363b2619c1e1cbad472
 div.links ul li > a {
   font-size: 20pt;
 }
