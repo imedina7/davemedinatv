@@ -15,10 +15,12 @@ npm run serve
 npm run build
 ```
 
+### Test production server locally
+```
+npm run start
+```
+
 ### Lints and fixes files
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
