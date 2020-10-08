@@ -30,14 +30,13 @@ const csrf = require('csurf')
 
 const port = envars.PORT
 
-const csrfProtection = csrf({ cookie: true })
-
 const app = express()
 
 app.use(cookieParser())
 
 app.use('/', serveStatic(path.join(__dirname, '../dist')))
 
+const csrfProtection = csrf({ cookie: true })
 
 app.use(csrfProtection)
 

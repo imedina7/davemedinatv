@@ -7,22 +7,18 @@ const livestream = {
     liveStatus: (req, res, next) => {
 
         console.log('*** liveStatusFetch REQUEST ***')
-        if (req.cookies._csrf) {
-            if (liveUrl) {
-                const jsonResponse = { liveUrl, liveTimestamp }
-                const jsonStringResponse = JSON.stringify(jsonResponse)
+        if (liveUrl) {
+            const jsonResponse = { liveUrl, liveTimestamp }
+            const jsonStringResponse = JSON.stringify(jsonResponse)
 
-                console.log('*** liveStatusFetch RESPONSE ***')
-                console.log(jsonResponse)
+            console.log('*** liveStatusFetch RESPONSE ***')
+            console.log(jsonResponse)
 
-                res.send(jsonStringResponse)
-            } else {
-                console.log('*** liveStatusFetch RESPONSE ***')
-                console.log('*** 404 NOT FOUND ***')
-                res.send(404)
-            }
+            res.send(jsonStringResponse)
         } else {
-            res.send(403)
+            console.log('*** liveStatusFetch RESPONSE ***')
+            console.log('*** 404 NOT FOUND ***')
+            res.sendStatus(404)
         }
         next()
     }

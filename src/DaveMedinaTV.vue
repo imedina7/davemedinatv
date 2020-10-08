@@ -26,7 +26,22 @@ export default {
   },
 
   methods: {
-    fetchLiveStatus: () => {
+    getCsrfToken: () => {
+      const cookies = document.cookie.split('&')
+      let csrfToken = null
+
+      for (let i = 0; i < cookies.length; i++) {
+        if (cookies[i].split('=')[0] === '_csrf') {
+          csrfToken = cookies[i].split('=')[1]
+        }
+      }
+      if (csrfToken) {
+        axios.defaults.headers.common['X-XSRF-TOKEN'] = csrfToken
+      }
+    },
+    fetchLiveStatus: function () {
+      this.getCsrfToken()
+
       axios('/api/liveStatus').then((response) => {
         console.log(response)
       }).catch(err => {
