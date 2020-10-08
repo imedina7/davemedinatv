@@ -47,6 +47,7 @@ export default {
         this.liveUrl = response.data.liveUrl
       }).catch(err => {
         console.log('Live status request failed.')
+        console.log(err)
       })
     },
     main: function () {
