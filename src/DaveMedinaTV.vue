@@ -1,7 +1,8 @@
 <template>
-  <div id="davemedinatv" v-on:load="main">
+  <div id="davemedinatv">
     <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo"/>
     <SocialLinks />
+    <div v-if="liveUrl"><a :href="liveUrl"><span class="live-sign">EN VIVO</span></a></div>
   </div>
 </template>
 
@@ -43,10 +44,9 @@ export default {
       this.getCsrfToken()
 
       axios('/api/liveStatus').then((response) => {
-        console.log(response)
+        this.liveUrl = response.data.liveUrl
       }).catch(err => {
-        console.log('Live status request failed.\nError object:')
-        console.log(err)
+        console.log('Live status request failed.')
       })
     },
     main: function () {
@@ -83,6 +83,15 @@ body {
 }
 .logo-wrap {
   width: 100%;
+}
+span.live-sign {
+  padding: 3px 5px;
+  display:inline-block;
+  background-color: #FF0000;
+  border-radius: 3px;
+  border-top: 1px solid rgba(255, 150,150,0.6);
+  color: #FFFFFF;
+  text-shadow: 0 2px 1px #500, 0 0 4px #FFCCCC;
 }
 @media (min-width: 320px) {
 }
