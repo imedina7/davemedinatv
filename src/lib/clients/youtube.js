@@ -1,51 +1,88 @@
 const { google } = require('googleapis')
-const SERVICE_ACC_KEY = require('../../config').SERVICE_ACC_KEY
-const SERVICE_ACC_SUB = require('../../config').SERVICE_ACC_SUB
+const fs = require('fs')
+const envars = require('../../config')
 
-const genJWTPayload = () => {
-    return {
-        iss: SERVICE_ACC_KEY.client_email,
-        sub: SERVICE_ACC_SUB,
-        scope: 'https://www.googleapis.com/auth/youtube.readonly',
+const SERVICE_ACC_KEY = envars.SERVICE_ACC_KEY
+const SERVICE_ACC_SUB = envars.SERVICE_ACC_SUB
+const GOOGLE_APPLICATION_CREDENTIALS = envars.GOOGLE_APPLICATION_CREDENTIALS
+
+const genKeyFile = () => {
+    try {
+        fs.writeFileSync(GOOGLE_APPLICATION_CREDENTIALS, SERVICE_ACC_KEY, { mode: 0o440, flag: 'w' })
+        console.log(`${GOOGLE_APPLICATION_CREDENTIALS} file written successfuly!`)
+    } catch (err) {
+        if (err.errno == -13) {
+            console.log(`${GOOGLE_APPLICATION_CREDENTIALS} file already exists, skipping...`)
+            return GOOGLE_APPLICATION_CREDENTIALS
+        }
+        console.log(err)
+        console.error(`Could not save file: '${GOOGLE_APPLICATION_CREDENTIALS}'\n`)
+        throw err
     }
+    return GOOGLE_APPLICATION_CREDENTIALS
 }
 
-const authenticate = (access_token) => {
-    const authPromise = new Promise((resolve, reject) => {
-        try {
-            const client = google.youtube({
-                version: 'v3',
-                auth: access_token
-            })
-            resolve(client)
-        } catch (err) {
-            reject(err)
-        }
+async function authenticate() {
+    genKeyFile()
+    const auth = new google.auth.GoogleAuth({
+        sub: SERVICE_ACC_SUB,
+        scopes: ["https://www.googleapis.com/auth/youtube.readonly"]
+    });
+
+    const authClient = await auth.getClient();
+
+    const client = google.youtube({
+        version: 'v3',
+        sub: SERVICE_ACC_SUB,
+        auth: authClient,
     })
-    return authPromise
+    return client
 }
 
 const getLastLivestream = (client) => {
-    const itemPromise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         if (client === null)
             reject('Invalid Youtube client')
-        client.liveBroadcasts.list({
+
+        const options = {
             "part": [
                 "snippet,contentDetails,status"
             ],
             "broadcastType": "all",
-            "mine": true
-        }).then((response) => {
+            "id": envars.YT_CHANNEL_ID
+        }
+
+        client.liveBroadcasts.list(options).then((response) => {
             console.log('getLastLivestream: Got response!')
-            resolve(response.result.items[0])
+            const livestreamObj = response.result.items[0]
+            resolve(livestreamObj)
         }).catch((err) => {
             console.log('getLastLivestream: FAILED')
             reject(err)
         })
     })
-
-    return itemPromise
 }
 
+const getVideoInfo = (client, videos) => {
+    return new Promise((resolve, reject) => {
+        if (client === null)
+            reject('Invalid Youtube client')
 
-module.exports = { authenticate, getLastLivestream }
+        const options = {
+            "part": [
+                "snippet,contentDetails,status"
+            ],
+            "id": videos.join(',')
+        }
+
+        client.videos.list(options).then((response) => {
+            console.log('getVideoList: Got response!')
+            resolve(response.data.items)
+        }).catch((err) => {
+            console.log('getVideoList: FAILED')
+            reject(err)
+        })
+    })
+}
+
+module.exports = { authenticate, getLastLivestream, getVideoInfo }
