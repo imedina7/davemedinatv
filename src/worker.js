@@ -34,15 +34,15 @@
                 console.log('last livestream is: ')
                 console.log(livestream)
             }).catch((err) => {
-                console.error('Failed to get last livestream: Error ', err.code, err.errors)
+                console.error('Failed to get last livestream: Error', err.code, err.errors)
             })
 
-            ytClient.getVideoInfo(client, ['3X3RQps6A40', '7b7Pm8QgJpw']).then((videos) => {
+            ytClient.getVideoInfo(client, []).then((videos) => {
                 console.log('Got videos: ')
                 console.log(videos)
                 logIntervalStatus(intervals++, "end")
             }).catch((err) => {
-                console.error('Failed to get videos: ', err)
+                console.error('Failed to get videos: Error', err.code, err.errors)
                 logIntervalStatus(intervals++, "end")
             })
         }, WORKER_INTERVAL_MS)
