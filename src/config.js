@@ -9,7 +9,8 @@ const envars = {
     SERVICE_ACC_KEY: (process.env.SERVICE_ACC_KEY) ? process.env.SERVICE_ACC_KEY : null,
     SERVICE_ACC_SUB: process.env.SERVICE_ACC_SUB || null,
     GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS || null,
-    YT_CHANNEL_ID: process.env.YT_CHANNEL_ID || null
+    YT_CHANNEL_ID: process.env.YT_CHANNEL_ID || null,
+    G_APIKEY: process.env.G_APIKEY || null
 }
 
 module.exports = envars
