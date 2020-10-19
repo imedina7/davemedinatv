@@ -35,7 +35,8 @@
             ytClient.getLatestUploads(client).then((latestUploads) => {
                 console.log(latestUploads)
                 const lastUpdateDate = new Date()
-                redis.set('latestUploads', { lastUpdate: lastUpdateDate, data: { items: latestUploads } })
+                await redis.set('latestUploads', { lastUpdate: lastUpdateDate, data: { items: latestUploads } })
+                console.log("Successfuly saved latest uploads to cache.")
                 logIntervalStatus(intervals++, "end")
             })
 
