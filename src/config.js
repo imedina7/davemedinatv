@@ -10,7 +10,8 @@ const envars = {
     SERVICE_ACC_SUB: process.env.SERVICE_ACC_SUB || null,
     GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS || null,
     YT_CHANNEL_ID: process.env.YT_CHANNEL_ID || null,
-    G_APIKEY: process.env.G_APIKEY || null
+    G_APIKEY: process.env.G_APIKEY || null,
+    REDIS_URL: process.env.REDIS_URL || 'redis://127.0.0.1:6379'
 }
 
 module.exports = envars

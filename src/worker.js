@@ -1,6 +1,7 @@
 (() => {
 
     const ytClient = require('./lib/clients/youtube')
+    const redis = require('./lib/clients/redis')
     const envars = require('./config')
     let interval_ID = null
 
@@ -18,6 +19,7 @@
 
     const init = function () {
         intervals = 0
+        redis.initialize()
         return getClient()
     }
     const logIntervalStatus = (interval, status) => {
@@ -32,6 +34,8 @@
 
             ytClient.getLatestUploads(client).then((latestUploads) => {
                 console.log(latestUploads)
+                const lastUpdateDate = new Date()
+                redis.set('latestUploads', { lastUpdate: lastUpdateDate, data: { items: latestUploads } })
                 logIntervalStatus(intervals++, "end")
             })
 

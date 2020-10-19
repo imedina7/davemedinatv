@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "googleapis": "^61.0.0",
     "jsonwebtoken": "^8.5.1",
+    "node-cache-redis": "^6.1.0",
     "serve-static": "^1.14.1",
     "vue": "^2.6.11"
   },
