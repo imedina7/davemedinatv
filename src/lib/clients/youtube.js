@@ -27,7 +27,6 @@ async function authenticate() {
     const auth = new google.auth.GoogleAuth({
         sub: SERVICE_ACC_SUB,
         scopes: ["https://www.googleapis.com/auth/youtube.readonly",
-            'https://www.googleapis.com/auth/youtube',
             'https://www.googleapis.com/auth/youtube.force-ssl']
     });
 
