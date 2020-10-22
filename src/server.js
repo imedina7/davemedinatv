@@ -19,7 +19,7 @@
 
 const envars = require('./config.js')
 
-const apiRouter = require('./api/router')
+const apiRouter = require('./api/v1/router')
 
 const express = require('express')
 const serveStatic = require('serve-static')

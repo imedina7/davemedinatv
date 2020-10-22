@@ -43,7 +43,7 @@ export default {
     fetchLiveStatus: function () {
       this.getCsrfToken()
 
-      axios('/api/liveStatus').then((response) => {
+      axios('/api/v1/liveStatus').then((response) => {
         this.liveUrl = response.data.liveUrl
       }).catch(err => {
         console.log('Live status request failed.')
