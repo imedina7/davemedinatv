@@ -20,6 +20,7 @@
 const envars = require('./config.js')
 
 const apiRouter = require('./api/router')
+const redir = require('./lib/utils/redir')
 
 const express = require('express')
 const serveStatic = require('serve-static')
@@ -36,11 +37,15 @@ app.use(cookieParser())
 
 app.use('/', serveStatic(path.join(__dirname, '../dist')))
 
+
 const csrfProtection = csrf({ cookie: true })
+
+app.use('/', redir.Router())
 
 app.use(csrfProtection)
 
 app.use('/api', apiRouter())
+
 
 app.listen(port, () => {
     console.log(`Application started on port number: ${port}.`)

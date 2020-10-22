@@ -1,6 +1,7 @@
-import { Ref } from './Ref'
+const Ref = require('./Ref')
 
-export default class Click {
+class Click {
+
     constructor(refid, url) {
         this.ref = new Ref(refid)
         this.date = new Date()
@@ -16,3 +17,4 @@ export default class Click {
         return this.url
     }
 }
+module.exports = Click

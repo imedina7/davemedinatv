@@ -1,4 +1,4 @@
-export default class Ref {
+class Ref {
 
     constructor(id) {
         this.id = id
@@ -25,3 +25,5 @@ export default class Ref {
         return this.type
     }
 }
+
+module.exports = Ref
