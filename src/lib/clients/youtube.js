@@ -89,10 +89,10 @@ const getVideos = (client, videos) => {
         }
 
         client.videos.list(options).then((response) => {
-            console.log('getVideoList: Got response!')
+            console.log('getVideos: Got response!')
             resolve(response.data.items)
         }).catch((err) => {
-            console.log('getVideoList: FAILED')
+            console.log('getVideos: FAILED')
             reject(err)
         })
     })

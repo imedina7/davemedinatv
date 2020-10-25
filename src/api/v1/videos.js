@@ -1,5 +1,5 @@
 const ExpressRouter = require('express').Router
-const redis = require('../lib/clients/redis')
+const redis = require('../../lib/clients/redis')
 
 const videoGetters = (redis) => {
     return {

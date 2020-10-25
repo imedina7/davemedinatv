@@ -19,8 +19,7 @@
 
 const envars = require('./config.js')
 
-const apiRouter = require('./api/router')
-const redir = require('./lib/utils/redir')
+const ApiRouters = require('./api/router')
 
 const express = require('express')
 const serveStatic = require('serve-static')
@@ -44,7 +43,7 @@ app.use('/', redir.Router())
 
 app.use(csrfProtection)
 
-app.use('/api', apiRouter())
+app.use('/api/v1', ApiRouters.v1())
 
 
 app.listen(port, () => {
