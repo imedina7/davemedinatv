@@ -43,7 +43,7 @@ export default {
     fetchLiveStatus: function () {
       this.getCsrfToken()
 
-      axios('/api/liveStatus').then((response) => {
+      axios('/api/v1/liveStatus').then((response) => {
         this.liveUrl = response.data.liveUrl
       }).catch(err => {
         console.log('Live status request failed.')
@@ -93,6 +93,7 @@ span.live-sign {
   border-top: 1px solid rgba(255, 150,150,0.6);
   color: #FFFFFF;
   text-shadow: 0 2px 1px #500, 0 0 4px #FFCCCC;
+  box-shadow: 0 2px #22000075, 0 0 50px #ffe0cc75, 0 0 10px #ff8e3d52;
 }
 @media (min-width: 320px) {
 }

@@ -1,12 +1,15 @@
 const ExpressRouter = require('express').Router
-const livestream = require('./livestream')
+const livestream = require('./v1/livestream')
+const VideoRouter = require('./v1/videos')
 
-const ApiRouter = () => {
-    const router = new ExpressRouter()
+const ApiRouters = {
+    v1: () => {
+        const router = new ExpressRouter()
 
-    router.get('/liveStatus', livestream.liveStatus)
-
-    return router
+        router.use('/video', VideoRouter())
+        router.get('/liveStatus', livestream.liveStatus)
+        return router
+    }
 }
 
-module.exports = ApiRouter
+module.exports = ApiRouters

@@ -1,4 +1,4 @@
-const envars = require('../config')
+const envars = require('../../config')
 const liveUrl = envars.LIVE_YOUTUBE_URL
 const liveTimestamp = envars.LIVE_TIMESTAMP
 
