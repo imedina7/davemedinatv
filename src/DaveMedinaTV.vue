@@ -2,7 +2,7 @@
   <div id="davemedinatv">
     <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo"/>
     <SocialLinks />
-    <div v-if="liveUrl"><a :href="liveUrl"><span class="live-sign">LIVE NOW</span></a></div>
+    <div v-if="isLive"><a href="/live"><span class="live-sign">LIVE NOW</span></a></div>
   </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
     fetchLiveStatus: function () {
       this.getCsrfToken()
       axios('/api/v1/liveStatus').then((response) => {
-        this.liveUrl = response.data.liveUrl
+        this.isLive = (response.data.liveUrl !== null)
       }).catch(err => {
         console.log('Live status request failed.')
         console.log(err)
