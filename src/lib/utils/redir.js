@@ -11,6 +11,7 @@ function redirect(res, redirUrl) {
   } else {
     res.writeHead(301, { Location: redirUrl })
   }
+  res.send()
 }
 
 const redir = (req, res) => {
