@@ -47,7 +47,6 @@ export default {
       }).catch(err => {
         console.log('Live status request failed.')
         console.log(err)
-        this.liveUrl = 'https://www.youtube.com/watch?v=xxxxxxxxxx'
       })
     },
     main: function () {
