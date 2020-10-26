@@ -2,7 +2,7 @@
   <div id="davemedinatv">
     <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo"/>
     <SocialLinks />
-    <div v-if="liveUrl"><a :href="liveUrl"><span class="live-sign">EN VIVO</span></a></div>
+    <div v-if="liveUrl"><a :href="liveUrl"><span class="live-sign">LIVE</span></a></div>
   </div>
 </template>
 
@@ -61,13 +61,14 @@ export default {
 </script>
 
 <style>
+@import url('/assets/fonts/DoppioOne-Regular.ttf');
 
 body {
   background-color: #000000;
   font-size: 15px;
 }
 #davemedinatv {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Doppio One', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
