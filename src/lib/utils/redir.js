@@ -5,16 +5,15 @@ const ExpressRouter = require('express').Router
 const URL = require('url').URL
 const redis = require('../clients/redis')
 
-function redirect(res, redirUrl, next) {
+function redirect(res, redirUrl) {
   if (redirUrl === undefined || redirUrl === null) {
     res.writeHead(301, { Location: '/' })
   } else {
     res.writeHead(301, { Location: redirUrl })
   }
-  next()
 }
 
-const redir = (req, res, next) => {
+const redir = (req, res) => {
   const query = req.query
   const redirUrl = query.url
 
@@ -22,14 +21,14 @@ const redir = (req, res, next) => {
   const click = new Click(refId, redirUrl)
 
   redis.saveClick(click).then(() => {
-    redirect(res, redirUrl, next)
+    redirect(res, redirUrl)
   }).catch((err) => {
     console.error('[!] UX error: ', err)
-    redirect(res, redirUrl, next)
+    redirect(res, redirUrl)
   })
 }
-const live = (req, res, next) => {
-  redirect(res, liveUrl, next)
+const live = (req, res) => {
+  redirect(res, liveUrl)
 }
 const Router = () => {
   const router = new ExpressRouter()
