@@ -2,7 +2,7 @@
   <div id="davemedinatv">
     <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo"/>
     <SocialLinks />
-    <div v-if="liveUrl"><a :href="liveUrl"><span class="live-sign">LIVE</span></a></div>
+    <div v-if="liveUrl"><a :href="liveUrl"><span class="live-sign">LIVE NOW</span></a></div>
   </div>
 </template>
 
@@ -42,12 +42,12 @@ export default {
     },
     fetchLiveStatus: function () {
       this.getCsrfToken()
-
       axios('/api/v1/liveStatus').then((response) => {
         this.liveUrl = response.data.liveUrl
       }).catch(err => {
         console.log('Live status request failed.')
         console.log(err)
+        this.liveUrl = 'https://www.youtube.com/watch?v=xxxxxxxxxx'
       })
     },
     main: function () {
@@ -62,13 +62,14 @@ export default {
 
 <style>
 @import url('/assets/fonts/DoppioOne-Regular.ttf');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap');
 
 body {
   background-color: #000000;
   font-size: 15px;
 }
 #davemedinatv {
-  font-family: 'Doppio One', Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -83,10 +84,14 @@ body {
   justify-content: center;
   flex-flow: column;
 }
+h1,h2,h3 {
+  font-family: 'Doppio One';
+}
 .logo-wrap {
   width: 100%;
 }
 span.live-sign {
+  font-family: 'Doppio One';
   padding: 3px 5px;
   display:inline-block;
   background-color: #FF0000;
