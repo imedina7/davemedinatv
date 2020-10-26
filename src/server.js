@@ -21,6 +21,8 @@ const envars = require('./config.js')
 
 const ApiRouters = require('./api/router')
 
+const redir = require('./lib/utils/redir')
+
 const express = require('express')
 const serveStatic = require('serve-static')
 const path = require('path')
