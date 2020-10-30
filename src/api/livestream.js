@@ -8,7 +8,10 @@ const livestream = {
 
         console.log('*** liveStatusFetch REQUEST ***')
         if (liveUrl) {
-            const jsonResponse = { liveUrl, liveTimestamp }
+
+            const type = (liveUrl.match(/(.*)youtu\.?be(.*)/)) ? 'video' : 'audio'
+
+            const jsonResponse = { liveUrl, liveTimestamp, type }
             const jsonStringResponse = JSON.stringify(jsonResponse)
 
             console.log('*** liveStatusFetch RESPONSE ***')
