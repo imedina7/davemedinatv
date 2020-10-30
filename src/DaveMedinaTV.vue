@@ -2,7 +2,10 @@
   <div id="davemedinatv">
     <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo"/>
     <SocialLinks />
-    <div v-if="liveUrl"><a :href="liveUrl"><span class="live-sign">EN VIVO</span></a></div>
+    <div v-if="isLive">
+      <LiveButton v-if="showPlayer !== true" :streamtype="liveObj.type" :liveUrl="liveObj.liveUrl" v-on:showplayer="showPlayerHandle"/>
+      <LivePlayer v-if="showPlayer === true" :streamtype="liveObj.type" :liveUrl="liveObj.liveUrl" />
+    </div>
   </div>
 </template>
 
@@ -10,6 +13,8 @@
 
 import SocialLinks from './components/SocialLinks.vue'
 import StaticLogo from './components/StaticLogo.vue'
+import LivePlayer from './components/LivePlayer'
+import LiveButton from './lib/components/LiveButton'
 
 import axios from 'axios'
 
@@ -18,15 +23,32 @@ export default {
 
   components: {
     SocialLinks,
-    StaticLogo
+    StaticLogo,
+    LivePlayer,
+    LiveButton
   },
-
   props: {
-    isLive: null,
-    liveUrl: null
+    showPlayer: Boolean
   },
-
+  data () {
+    return {
+      liveObj: Object
+    }
+  },
+  computed: {
+    isLive () {
+      if (this.liveObj !== undefined) {
+        return this.liveObj.liveUrl !== null
+      } else {
+        return false
+      }
+    }
+  },
   methods: {
+    showPlayerHandle () {
+      console.log('Showing player...')
+      this.showPlayer = true
+    },
     getCsrfToken: () => {
       const cookies = document.cookie.split('&')
       let csrfToken = null
@@ -62,6 +84,10 @@ export default {
 
 <style>
 
+a {
+  cursor: pointer
+}
+
 body {
   background-color: #000000;
   font-size: 15px;
@@ -85,6 +111,7 @@ body {
 .logo-wrap {
   width: 100%;
 }
+<<<<<<< HEAD
 span.live-sign {
   padding: 3px 5px;
   display:inline-block;
@@ -95,6 +122,8 @@ span.live-sign {
   text-shadow: 0 2px 1px #500, 0 0 4px #FFCCCC;
   box-shadow: 0 2px #22000075, 0 0 50px #ffe0cc75, 0 0 10px #ff8e3d52;
 }
+=======
+>>>>>>> 5aea005 (Finish radio player implementation)
 @media (min-width: 320px) {
 }
 @media (min-width: 568px) {
