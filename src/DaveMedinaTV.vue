@@ -67,6 +67,7 @@ export default {
 
       axios('/api/v1/liveStatus').then((response) => {
         this.liveObj = response.data
+        this.isLive = this.liveObj.liveUrl !== null
       }).catch(err => {
         console.log('Live status request failed.')
         console.log(err)

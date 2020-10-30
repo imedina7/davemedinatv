@@ -7,7 +7,6 @@ node_modules
 .env.local
 .env.*.local
 
-davemedinatv.json
 .env
 
 # Log files
@@ -27,3 +26,4 @@ pnpm-debug.log*
 .openssl/
 
 Procfile
+davemedinatv.json
