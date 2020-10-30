@@ -2,7 +2,10 @@
   <div id="davemedinatv">
     <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo"/>
     <SocialLinks />
-    <div v-if="liveUrl"><a :href="liveUrl"><span class="live-sign">EN VIVO</span></a></div>
+    <div v-if="isLive">
+      <LiveButton v-if="showPlayer !== true" :streamtype="liveObj.type" :liveUrl="liveObj.liveUrl" v-on:showplayer="showPlayerHandle"/>
+      <LivePlayer v-if="showPlayer === true" :streamtype="liveObj.type" :liveUrl="liveObj.liveUrl" />
+    </div>
   </div>
 </template>
 
@@ -10,6 +13,8 @@
 
 import SocialLinks from './components/SocialLinks.vue'
 import StaticLogo from './components/StaticLogo.vue'
+import LivePlayer from './components/LivePlayer'
+import LiveButton from './lib/components/LiveButton'
 
 import axios from 'axios'
 
@@ -18,15 +23,32 @@ export default {
 
   components: {
     SocialLinks,
-    StaticLogo
+    StaticLogo,
+    LivePlayer,
+    LiveButton
   },
-
   props: {
-    isLive: null,
-    liveUrl: null
+    showPlayer: Boolean
   },
-
+  data () {
+    return {
+      liveObj: Object
+    }
+  },
+  computed: {
+    isLive () {
+      if (this.liveObj !== undefined) {
+        return this.liveObj.liveUrl !== null
+      } else {
+        return false
+      }
+    }
+  },
   methods: {
+    showPlayerHandle () {
+      console.log('Showing player...')
+      this.showPlayer = true
+    },
     getCsrfToken: () => {
       const cookies = document.cookie.split('&')
       let csrfToken = null
@@ -44,7 +66,8 @@ export default {
       this.getCsrfToken()
 
       axios('/api/liveStatus').then((response) => {
-        this.liveUrl = response.data.liveUrl
+        this.liveObj = response.data
+        this.isLive = this.liveObj.liveUrl !== null
       }).catch(err => {
         console.log('Live status request failed.')
         console.log(err)
@@ -61,6 +84,10 @@ export default {
 </script>
 
 <style>
+
+a {
+  cursor: pointer
+}
 
 body {
   background-color: #000000;
@@ -84,15 +111,6 @@ body {
 }
 .logo-wrap {
   width: 100%;
-}
-span.live-sign {
-  padding: 3px 5px;
-  display:inline-block;
-  background-color: #FF0000;
-  border-radius: 3px;
-  border-top: 1px solid rgba(255, 150,150,0.6);
-  color: #FFFFFF;
-  text-shadow: 0 2px 1px #500, 0 0 4px #FFCCCC;
 }
 @media (min-width: 320px) {
 }
