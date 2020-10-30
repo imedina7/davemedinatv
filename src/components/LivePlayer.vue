@@ -1,19 +1,20 @@
 <template>
   <div class="live-player">
-
+    <video-player ref="videoPlayer"></video-player>
   </div>
 </template>
 
 <script>
 
-import axios from axios
-
-
+import { videoPlayer } from vue-video-player
 
 export default {
   name: 'LivePlayer',
   props: {
     liveUrl: String
+  },
+  components: {
+    videoPlayer
   }
 }
 </script>
