@@ -21,6 +21,8 @@ const envars = require('./config.js')
 
 const ApiRouters = require('./api/router')
 
+const http = require('http')
+
 const express = require('express')
 const serveStatic = require('serve-static')
 const path = require('path')
@@ -32,6 +34,10 @@ const port = envars.PORT
 
 const app = express()
 
+const server = http.createServer(app)
+
+const io = require('socket.io').listen(server)
+
 app.use(cookieParser())
 
 app.use('/', serveStatic(path.join(__dirname, '../dist')))
@@ -40,8 +46,12 @@ const csrfProtection = csrf({ cookie: true })
 
 app.use(csrfProtection)
 
+
 app.use('/api/v1', ApiRouters.v1())
 
 app.listen(port, () => {
     console.log(`Application started on port number: ${port}.`)
+    io.on('connection', (socket) => {
+        console.log('Successfuly connected')
+    })
 })

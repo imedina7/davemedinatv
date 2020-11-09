@@ -71,6 +71,7 @@ export default {
       }).catch(err => {
         console.log('Live status request failed.')
         console.log(err)
+        this.isLive = false
       })
     },
     main: function () {
