@@ -25,6 +25,7 @@
     "googleapis": "^61.0.0",
     "jsonwebtoken": "^8.5.1",
     "node-cache-redis": "^6.1.0",
+    "redis": "^3.0.2",
     "serve-static": "^1.14.1",
     "videojs-youtube": "^2.6.1",
     "vue": "^2.6.11",

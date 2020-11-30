@@ -1,10 +1,17 @@
 <template>
   <div class="live-player">
     <div v-if="streamtype == 'video'">
-      <video-player ref="videoPlayer" :options="playerOptions"></video-player>
+      <video-player
+        ref="videoPlayer"
+        :options="playerOptions"
+      />
     </div>
     <div v-if="streamtype == 'audio'">
-      <audio :src="liveUrl" autoplay controls></audio>
+      <audio
+        :src="liveUrl"
+        autoplay
+        controls
+      />
     </div>
   </div>
 </template>
@@ -16,6 +23,19 @@ import 'videojs-youtube'
 
 export default {
   name: 'LivePlayer',
+  components: {
+    videoPlayer
+  },
+  props: {
+    liveUrl: {
+      type: String,
+      default: ''
+    },
+    streamtype: {
+      type: String,
+      default: 'audio'
+    }
+  },
   data () {
     return {
       playerOptions: {
@@ -27,15 +47,8 @@ export default {
       }
     }
   },
-  props: {
-    liveUrl: String,
-    streamtype: String
-  },
   mounted () {
     console.log('player mounted')
-  },
-  components: {
-    videoPlayer
   }
 }
 </script>

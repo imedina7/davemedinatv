@@ -1,20 +1,20 @@
 <template>
   <div id="davemedinatv">
-    <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo"/>
-    <SocialLinks />
-    <div v-if="isLive">
-      <LiveButton v-if="showPlayer !== true" :streamtype="liveObj.type" :liveUrl="liveObj.liveUrl" v-on:showplayer="showPlayerHandle"/>
-      <LivePlayer v-if="showPlayer === true" :streamtype="liveObj.type" :liveUrl="liveObj.liveUrl" />
-    </div>
+    <Curtain
+      id="curtain"
+      :is-live="isLive"
+      :links-style="linksStyle"
+      :style="curtainStyle"
+      :live-url="liveUrl"
+    />
+    <Content video-content="{}/" />
   </div>
 </template>
 
 <script>
 
-import SocialLinks from './components/SocialLinks.vue'
-import StaticLogo from './components/StaticLogo.vue'
-import LivePlayer from './components/LivePlayer'
-import LiveButton from './lib/components/LiveButton'
+import Curtain from './components/Curtain.vue'
+import Content from './components/Content.vue'
 
 import axios from 'axios'
 
@@ -22,27 +22,23 @@ export default {
   name: 'DaveMedinaTV',
 
   components: {
-    SocialLinks,
-    StaticLogo,
-    LivePlayer,
-    LiveButton
+    Curtain,
+    Content
   },
-  props: {
-    showPlayer: Boolean
-  },
+
   data () {
     return {
-      liveObj: Object
+      isLive: true,
+      liveUrl: null,
+      curtainStyle: 'height: 100%',
+      linksStyle: 'width: 100%'
     }
   },
-  computed: {
-    isLive () {
-      if (this.liveObj !== undefined) {
-        return this.liveObj.liveUrl !== null
-      } else {
-        return false
-      }
-    }
+  mounted: function () {
+    this.main()
+  },
+  destroyed () {
+    document.removeEventListener('scroll', this.scrollHandler)
   },
   methods: {
     showPlayerHandle () {
@@ -64,26 +60,36 @@ export default {
     },
     fetchLiveStatus: function () {
       this.getCsrfToken()
-
       axios('/api/v1/liveStatus').then((response) => {
-        this.liveObj = response.data
-        this.isLive = this.liveObj.liveUrl !== null
+        this.isLive = (response.data.liveUrl !== null)
       }).catch(err => {
         console.log('Live status request failed.')
         console.log(err)
       })
     },
+
+    scrollHandler: function (e) {
+      const offsetY = e.path[1].pageYOffset
+      const heightPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 90 : 90)
+      const widthPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 40 : 40)
+      this.curtainStyle = `height: ${heightPercent}%;`
+      this.linksStyle = `width: ${widthPercent}%;`
+      if (offsetY >= 250) {
+        this.curtainStyle = `height: ${heightPercent}%; flex-direction: row;`
+        this.linksStyle = `width: ${widthPercent}%; justify-content: end; font-size: 0.8em`
+      }
+    },
     main: function () {
+      document.addEventListener('scroll', this.scrollHandler)
       this.fetchLiveStatus()
     }
-  },
-  mounted: function () {
-    this.main()
   }
 }
 </script>
 
 <style>
+@import url('/assets/fonts/DoppioOne-Regular.ttf');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap');
 
 a {
   cursor: pointer
@@ -92,44 +98,36 @@ a {
 body {
   background-color: #000000;
   font-size: 15px;
+  margin: 0;
+  padding: 0;
 }
+
 #davemedinatv {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 0;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column;
+  display:flex
 }
-.logo-wrap {
-  width: 100%;
+h1,h2,h3 {
+  font-family: 'Doppio One';
+  color:silver;
+  padding-left: 0.5em;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8)
 }
+
 @media (min-width: 320px) {
 }
 @media (min-width: 568px) {
-  .logo-wrap {
-    width: 80%;
-  }
+
 }
 @media (min-width: 768px) {
   body {
     font-size: 18px;
   }
-  .logo-wrap {
-    width: 75%;
-  }
 }
 @media (min-width: 1024px) {
-  .logo-wrap {
-    width: 70%;
-  }
+
 }
 </style>
