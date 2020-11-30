@@ -39,10 +39,12 @@ div.content-wrap {
 div.content {
   z-index: 100;
   width: 100%;
-  margin-top: 100vh;
+  position: relative;
+  top: 100vh;
   display:flex;
   flex-grow: 1;
   background-color: rgba(0,0,0,0.8);
+  background-image: url('../assets/noisy_bg.png');
   flex-direction: column;
   height: 2000px;
   backdrop-filter: blur(5px);

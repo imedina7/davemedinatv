@@ -59,11 +59,11 @@ div.wrap {
   max-width: 80%
 }
 div.live-button {
-  margin: 2px 20px;
+  margin: 0.3px .8em;
 }
 span.live-sign {
   font-family: 'Doppio One';
-  padding: 3px 10px;
+  padding: 0.1em 0.5em;
   background: linear-gradient(#ff4444 30%, #FF0000 40%, #ff2600 80%, #ee1500 95%,#772222 100%);
   border-radius: 3px;
   border-top: 1px solid rgba(255, 150,150,0.6);
