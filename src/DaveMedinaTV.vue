@@ -1,11 +1,13 @@
 <template>
   <div id="davemedinatv">
-    <Curtain id="curtain"
-      :isLive="this.isLive"
-      :linksStyle="this.linksStyle"
-      :style="this.curtainStyle"
-      :liveUrl="this.liveUrl"/>
-    <Content/>
+    <Curtain
+      id="curtain"
+      :is-live="isLive"
+      :links-style="linksStyle"
+      :style="curtainStyle"
+      :live-url="liveUrl"
+    />
+    <Content video-content="{}/" />
   </div>
 </template>
 
@@ -32,6 +34,12 @@ export default {
       linksStyle: 'width: 100%'
     }
   },
+  mounted: function () {
+    this.main()
+  },
+  destroyed () {
+    document.removeEventListener('scroll', this.scrollHandler)
+  },
   methods: {
     getCsrfToken: () => {
       const cookies = document.cookie.split('&')
@@ -55,6 +63,7 @@ export default {
         console.log(err)
       })
     },
+
     scrollHandler: function (e) {
       const offsetY = e.path[1].pageYOffset
       const heightPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 90 : 90)
@@ -70,12 +79,6 @@ export default {
       document.addEventListener('scroll', this.scrollHandler)
       this.fetchLiveStatus()
     }
-  },
-  mounted: function () {
-    this.main()
-  },
-  destroyed () {
-    document.removeEventListener('scroll', this.scrollHandler)
   }
 }
 </script>
@@ -103,6 +106,7 @@ h1,h2,h3 {
   font-family: 'Doppio One';
   color:silver;
   padding-left: 0.5em;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8)
 }
 
 @media (min-width: 320px) {

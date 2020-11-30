@@ -1,18 +1,30 @@
 <template>
   <div class="content-wrap">
     <div class="content">
-      <h1>Videos populares</h1>
+      <VideoList title="Videos Populares" />
+      <VideoList title="Últimos Videos" />
     </div>
-    <Trailer class="trailer"/>
+    <Trailer class="trailer" />
   </div>
 </template>
 
 <script>
 import Trailer from './Trailer'
+import VideoList from './VideoList'
+
 export default {
   name: 'Content',
   components: {
-    Trailer
+    Trailer,
+    VideoList
+  },
+  props: {
+    videoContent: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
   },
   data () {
     return {

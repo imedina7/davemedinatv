@@ -1,7 +1,6 @@
 <template>
   <div class="video-item">
-      <img :src="this.thumbnail" />
-
+    <img :src="thumbnail">
   </div>
 </template>
 
@@ -9,7 +8,12 @@
 export default {
   name: 'VideoItem',
   props: {
-    video: Object
+    video: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
   },
   computed: {
     thumbnail () {

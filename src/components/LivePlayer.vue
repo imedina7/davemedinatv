@@ -1,19 +1,16 @@
 <template>
-  <div class="live-player">
-
-  </div>
+  <div class="live-player" />
 </template>
 
 <script>
 
-import axios from axios
-
-
-
 export default {
   name: 'LivePlayer',
   props: {
-    liveUrl: String
+    liveUrl: {
+      type: String,
+      default: ''
+    }
   }
 }
 </script>

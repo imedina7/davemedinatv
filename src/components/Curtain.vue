@@ -1,10 +1,19 @@
 <template>
   <div class="wrap">
-    <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo" />
-    <div v-if="isLive" class="live-button">
+    <StaticLogo
+      class="logo-wrap"
+      aria-label="DaveMedinaTV Logo"
+    />
+    <div
+      v-if="isLive"
+      class="live-button"
+    >
       <a href="/live"><span class="live-sign">LIVE</span></a>
     </div>
-    <SocialLinks :style="this.linksStyle" class="social-links"/>
+    <SocialLinks
+      :style="linksStyle"
+      class="social-links"
+    />
   </div>
 </template>
 
@@ -20,8 +29,14 @@ export default {
   },
   props: {
     isLive: Boolean,
-    liveUrl: String,
-    linksStyle: String
+    liveUrl: {
+      type: String,
+      default: ''
+    },
+    linksStyle: {
+      type: String,
+      default: ''
+    }
   },
   mounted () {
     this.curtain = document.querySelector('.wrap')
@@ -50,7 +65,7 @@ div.wrap {
   backdrop-filter: blur(10px);
   z-index: 500;
   box-shadow: 0 3px 10px black;
-  transition: height 500ms;
+  transition: height 500ms ease-out;
 }
 .logo-wrap {
   height: 120%;

@@ -1,9 +1,17 @@
 <template>
-    <div class="trailer-preview">
-      <video id="video" autoplay muted loop>
-        <source src="https://dl5.webmfiles.org/big-buck-bunny_trailer.webm" type="video/webm"/>
-      </video>
-    </div>
+  <div class="trailer-preview">
+    <video
+      id="video"
+      autoplay
+      muted
+      loop
+    >
+      <source
+        src="https://dl5.webmfiles.org/big-buck-bunny_trailer.webm"
+        type="video/webm"
+      >
+    </video>
+  </div>
 </template>
 
 <script>
@@ -17,6 +25,11 @@ export default {
       windowHeight: null
     }
   },
+  computed: {
+    videoAlignX: function () {
+      return this.windowWidth / 2 - this.video.offsetWidth / 2
+    }
+  },
   mounted () {
     this.video = document.getElementById('video')
     this.videoContainer = document.querySelector('.trailer-preview')
@@ -26,11 +39,6 @@ export default {
     window.addEventListener('resize', e => {
       this.relocateBgVideo()
     })
-  },
-  computed: {
-    videoAlignX: function () {
-      return this.windowWidth / 2 - this.video.offsetWidth / 2
-    }
   },
   methods: {
     relocateBgVideo: function () {

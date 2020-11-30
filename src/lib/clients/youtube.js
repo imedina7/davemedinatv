@@ -1,5 +1,6 @@
 const { google } = require('googleapis')
 const fs = require('fs')
+const { InvalidClientError } = require('../utils/exceptions')
 const envars = require('../../config')
 
 const SERVICE_ACC_KEY = envars.SERVICE_ACC_KEY
@@ -42,7 +43,7 @@ async function authenticate () {
 
 const getLastLivestream = (client) => {
   return new Promise((resolve, reject) => {
-    if (client === null) { reject('Invalid Youtube client') }
+    if (client === null) { reject(InvalidClientError('Invalid Youtube client')) }
 
     const options = {
       part: [
@@ -77,7 +78,7 @@ async function getLatestUploads (client) {
 }
 const getVideos = (client, videos) => {
   return new Promise((resolve, reject) => {
-    if (client === null) { reject('Invalid Youtube client') }
+    if (client === null) { reject(InvalidClientError('Invalid Youtube client')) }
 
     const options = {
       part: [

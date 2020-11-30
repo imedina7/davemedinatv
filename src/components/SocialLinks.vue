@@ -1,10 +1,33 @@
 <template>
-  <div class="links" aria-label="Redes Sociales">
+  <div
+    class="links"
+    aria-label="Redes Sociales"
+  >
     <ul>
-      <li><a aria-label="Youtube" href="https://www.youtube.com/DaveMedinaTV"><font-awesome-icon :icon="['fab', 'youtube']" /></a></li>
-      <li><a aria-label="Instagram" href="https://www.instagram.com/davemedina.tv"><font-awesome-icon :icon="['fab', 'instagram']" /></a></li>
-      <li><a aria-label="Twitter" href="https://www.twitter.com/davemedinatv"><font-awesome-icon :icon="['fab', 'twitter']" /></a></li>
-      <li><a aria-label="Facebook" href="https://www.facebook.com/davemedina.tv"><font-awesome-icon :icon="['fab', 'facebook']" /></a></li>
+      <li>
+        <a
+          aria-label="Youtube"
+          href="https://www.youtube.com/DaveMedinaTV"
+        ><font-awesome-icon :icon="['fab', 'youtube']" /></a>
+      </li>
+      <li>
+        <a
+          aria-label="Instagram"
+          href="https://www.instagram.com/davemedina.tv"
+        ><font-awesome-icon :icon="['fab', 'instagram']" /></a>
+      </li>
+      <li>
+        <a
+          aria-label="Twitter"
+          href="https://www.twitter.com/davemedinatv"
+        ><font-awesome-icon :icon="['fab', 'twitter']" /></a>
+      </li>
+      <li>
+        <a
+          aria-label="Facebook"
+          href="https://www.facebook.com/davemedina.tv"
+        ><font-awesome-icon :icon="['fab', 'facebook']" /></a>
+      </li>
     </ul>
   </div>
 </template>

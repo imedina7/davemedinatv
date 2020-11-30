@@ -1,19 +1,20 @@
 (() => {
+  const { InvalidClientError } = require('./lib/utils/exceptions')
   const ytClient = require('./lib/clients/youtube')
   const redis = require('./lib/clients/redis')
   const envars = require('./config')
-  let interval_ID = null
+  let intervalID = null
 
   const WORKER_INTERVAL_MS = envars.WORKER_INTERVAL_MS
 
   let intervals = null
-  let worker_client = null
+  let workerClient = null
 
   async function getClient () {
-    if (worker_client === null) {
-      worker_client = await ytClient.authenticate()
+    if (workerClient === null) {
+      workerClient = await ytClient.authenticate()
     }
-    return worker_client
+    return workerClient
   }
 
   const init = function () {
@@ -28,7 +29,7 @@
     return console.log(`** INTERVAL ${interval} ${status.toUpperCase()} **`)
   }
   const run = function (client) {
-    interval_ID = setInterval(() => {
+    intervalID = setInterval(() => {
       logIntervalStatus(intervals, 'hit')
 
       ytClient.getLatestUploads(client).then((latestUploads) => {
@@ -47,13 +48,13 @@
     return new Promise((resolve, reject) => {
       init().then((client) => {
         try {
-          if (!client) { throw new Exception('Invalid client') }
+          if (!client) { throw InvalidClientError('Invalid client') }
 
           run(client)
 
           console.log('*** DVMTV WORKER RUNNING ***')
         } catch (err) {
-          clearInterval(interval_ID)
+          clearInterval(intervalID)
           logIntervalStatus(null, 'clear')
 
           console.error('*** DVMTV WORKER STOPPED ***', err)
