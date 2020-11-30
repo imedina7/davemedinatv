@@ -1,5 +1,7 @@
 <template>
-  <div id="davemedinatv">
+  <div
+    id="davemedinatv"
+  >
     <Curtain
       id="curtain"
       :is-live="isLive"
@@ -7,7 +9,7 @@
       :style="curtainStyle"
       :live-url="liveUrl"
     />
-    <Content video-content="{}/" />
+    <Content />
   </div>
 </template>
 
@@ -38,7 +40,7 @@ export default {
     this.main()
   },
   destroyed () {
-    document.removeEventListener('scroll', this.scrollHandler)
+    document.removeEventListener('scroll', this.scrollHandler, { passive: true })
   },
   methods: {
     showPlayerHandle () {
@@ -69,7 +71,8 @@ export default {
     },
 
     scrollHandler: function (e) {
-      const offsetY = e.path[1].pageYOffset
+      console.log(e)
+      const offsetY = Math.trunc(e.path[1].pageYOffset)
       const heightPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 90 : 90)
       const widthPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 40 : 40)
       this.curtainStyle = `height: ${heightPercent}%;`
@@ -80,7 +83,7 @@ export default {
       }
     },
     main: function () {
-      document.addEventListener('scroll', this.scrollHandler)
+      document.addEventListener('scroll', this.scrollHandler, { passive: true })
       this.fetchLiveStatus()
     }
   }

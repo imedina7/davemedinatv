@@ -21,8 +21,8 @@ export default {
   props: {
     videoContent: {
       type: Object,
-      default: () => {
-        return {}
+      default: function () {
+        return { title: '' }
       }
     }
   },
