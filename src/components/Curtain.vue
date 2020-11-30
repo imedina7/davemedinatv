@@ -50,6 +50,7 @@ div.wrap {
   backdrop-filter: blur(10px);
   z-index: 500;
   box-shadow: 0 3px 10px black;
+  transition: height 500ms;
 }
 .logo-wrap {
   height: 120%;

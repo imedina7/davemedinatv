@@ -40,7 +40,7 @@ div.content {
   z-index: 100;
   width: 100%;
   position: relative;
-  top: 100vh;
+  top: 110vh;
   display:flex;
   flex-grow: 1;
   background-color: rgba(0,0,0,0.8);

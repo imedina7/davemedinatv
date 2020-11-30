@@ -4,7 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 
 import {
   faYoutube, faInstagram, faInstagramSquare,
-  faTwitter, faTwitterSquare, faFacebook, faMixcloud
+  faTwitter, faTwitterSquare, faFacebook, faPatreon
 } from '@fortawesome/free-brands-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -16,7 +16,7 @@ const brandsIcons = {
   faTwitter,
   faTwitterSquare,
   faFacebook,
-  faMixcloud
+  faPatreon
 }
 
 library.add(brandsIcons)
