@@ -26,7 +26,7 @@ export default {
 
   data () {
     return {
-      isLive: false,
+      isLive: true,
       liveUrl: null,
       curtainStyle: 'height: 100%',
       linksStyle: 'width: 100%'
@@ -59,10 +59,10 @@ export default {
       const offsetY = e.path[1].pageYOffset
       const heightPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 90 : 90)
       const widthPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 40 : 40)
-      this.curtainStyle = `height: ${heightPercent}%`
+      this.curtainStyle = `height: ${heightPercent}%;`
       this.linksStyle = `width: ${widthPercent}%;`
       if (offsetY >= 250) {
-        this.curtainStyle = `height: ${heightPercent}%; flex-direction: row`
+        this.curtainStyle = `height: ${heightPercent}%; flex-direction: row;`
         this.linksStyle = `width: ${widthPercent}%; justify-content: end; font-size: 0.8em`
       }
     },
@@ -95,26 +95,16 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 0;
   display:flex
 }
 h1,h2,h3 {
   font-family: 'Doppio One';
+  color:silver;
+  padding-left: 0.5em;
 }
 
-span.live-sign {
-  font-family: 'Doppio One';
-  padding: 3px 5px;
-  display:inline-block;
-  background-color: #FF0000;
-  border-radius: 3px;
-  border-top: 1px solid rgba(255, 150,150,0.6);
-  color: #FFFFFF;
-  text-shadow: 0 2px 1px #500, 0 0 4px #FFCCCC;
-  box-shadow: 0 2px #22000075, 0 0 50px #ffe0cc75, 0 0 10px #ff8e3d52;
-}
 @media (min-width: 320px) {
 }
 @media (min-width: 568px) {

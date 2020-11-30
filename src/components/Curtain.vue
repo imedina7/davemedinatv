@@ -1,10 +1,10 @@
 <template>
   <div class="wrap">
     <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo" />
-    <SocialLinks :style="this.linksStyle" class="social-links"/>
-    <div v-if="isLive">
-      <a href="/live"><span class="live-sign">LIVE NOW</span></a>
+    <div v-if="isLive" class="live-button">
+      <a href="/live"><span class="live-sign">LIVE</span></a>
     </div>
+    <SocialLinks :style="this.linksStyle" class="social-links"/>
   </div>
 </template>
 
@@ -35,7 +35,7 @@ div.wrap {
   background: rgba(0,0,0,0.6);
   background-image: url('../assets/tile.png');
   position:fixed;
-  padding: 5px 0;
+  padding: 5px;
   right:0;
   left: 0;
   top: 0;
@@ -47,14 +47,28 @@ div.wrap {
   justify-content: center;
   flex-flow: column;
   flex-grow: 1;
-  backdrop-filter: blur(5px);
-  z-index: 50;
+  backdrop-filter: blur(10px);
+  z-index: 500;
+  box-shadow: 0 3px 10px black;
 }
 .logo-wrap {
-  height: 90%;
+  height: 120%;
   width: auto;
   min-height: 80%;
   min-width: 30%;
   max-width: 80%
+}
+div.live-button {
+  margin: 2px 20px;
+}
+span.live-sign {
+  font-family: 'Doppio One';
+  padding: 3px 10px;
+  background: linear-gradient(#ff4444 30%, #FF0000 40%, #ff2600 80%, #ee1500 95%,#772222 100%);
+  border-radius: 3px;
+  border-top: 1px solid rgba(255, 150,150,0.6);
+  color: #FFFFFF;
+  text-shadow: inset 0 0 3px #FF0000, 0 2px 1px #500, 0 0 4px #FFCCCC;
+  box-shadow: 0 2px #22000075, 0 0 50px #ffe0cc75, 0 0 10px #ff8e3d52,inset 0 0 10px #CC0000;;
 }
 </style>

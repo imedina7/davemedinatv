@@ -24,12 +24,12 @@ h3 {
 ul {
   list-style-type: none;
   padding: 0;
-  display: inline-block;
   width: 100%;
   display: flex;
 }
 li {
-  flex-grow: 3;
+  flex-grow: 1;
+  text-align: center;
 }
 a {
   color: #a7a7a7;
@@ -40,7 +40,8 @@ a:hover {
 }
 div.links {
   width: 100%;
-  transition: all 1s
+  transition: all 1s;
+  flex-shrink: 3;
 }
 div.links ul li > a {
   font-size: 2em;

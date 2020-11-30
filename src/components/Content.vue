@@ -1,7 +1,9 @@
 <template>
-  <div class="content">
+  <div class="content-wrap">
+    <div class="content">
+      <h1>Videos populares</h1>
+    </div>
     <Trailer class="trailer"/>
-    <div><h1>Aca hay mas cosas</h1></div>
   </div>
 </template>
 
@@ -29,12 +31,20 @@ export default {
 <style scoped>
 .trailer {
   position: fixed;
+  z-index: -100;
+}
+div.content-wrap {
+  width:100%
 }
 div.content {
-  z-index: -100;
+  z-index: 100;
+  width: 100%;
+  margin-top: 100vh;
   display:flex;
   flex-grow: 1;
+  background-color: rgba(0,0,0,0.8);
   flex-direction: column;
-  height: 2000px
+  height: 2000px;
+  backdrop-filter: blur(5px);
 }
 </style>
