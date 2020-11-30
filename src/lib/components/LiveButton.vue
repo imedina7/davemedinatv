@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div v-if="streamtype === 'video'"><a :href="liveUrl"><span class="live-sign">EN VIVO</span></a></div>
-    <div v-if="streamtype === 'audio'"><a v-on:click="showPlayer"><span class="live-sign">EN VIVO</span></a></div>
+    <div v-if="streamtype === 'video'">
+      <a :href="liveUrl"><span class="live-sign">EN VIVO</span></a>
+    </div>
+    <div v-if="streamtype === 'audio'">
+      <a @click="showPlayer"><span class="live-sign">EN VIVO</span></a>
+    </div>
   </div>
 </template>
 
@@ -9,8 +13,14 @@
 export default {
   name: 'LiveButton',
   props: {
-    streamtype: String,
-    liveUrl: String
+    streamtype: {
+      type: String,
+      default: 'audio'
+    },
+    liveUrl: {
+      type: String,
+      default: ''
+    }
   },
   methods: {
     showPlayer () {

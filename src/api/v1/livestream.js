@@ -7,21 +7,10 @@ const livestream = {
   liveStatus: (req, res, next) => {
     console.log('*** liveStatusFetch REQUEST ***')
     if (liveUrl) {
-      const jsonResponse = { liveUrl, liveTimestamp }
+      const type = (liveUrl.match(/(.*)youtu\.?be(.*)/)) ? 'video' : 'audio'
+
+      const jsonResponse = { liveUrl, liveTimestamp, type }
       const jsonStringResponse = JSON.stringify(jsonResponse)
-
-<<<<<<< HEAD
-        console.log('*** liveStatusFetch REQUEST ***')
-        if (liveUrl) {
-
-            const type = (liveUrl.match(/(.*)youtu\.?be(.*)/)) ? 'video' : 'audio'
-
-            const jsonResponse = { liveUrl, liveTimestamp, type }
-            const jsonStringResponse = JSON.stringify(jsonResponse)
-=======
-      console.log('*** liveStatusFetch RESPONSE ***')
-      console.log(jsonResponse)
->>>>>>> UX
 
       res.send(jsonStringResponse)
     } else {
