@@ -2,6 +2,8 @@
 .DS_Store
 node_modules
 /dist
+.editorconfig
+.prettierrc
 
 # local env files
 .env.local

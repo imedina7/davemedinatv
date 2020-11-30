@@ -60,10 +60,10 @@ export default {
       const heightPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 90 : 90)
       const widthPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 40 : 40)
       this.curtainStyle = `height: ${heightPercent}%`
-      this.linksStyle = `width: ${widthPercent}%; `
+      this.linksStyle = `width: ${widthPercent}%;`
       if (offsetY >= 250) {
         this.curtainStyle = `height: ${heightPercent}%; flex-direction: row`
-        this.linksStyle = `width: ${widthPercent}%; justify-content: end`
+        this.linksStyle = `width: ${widthPercent}%; justify-content: end; font-size: 0.8em`
       }
     },
     main: function () {
@@ -73,6 +73,9 @@ export default {
   },
   mounted: function () {
     this.main()
+  },
+  destroyed () {
+    document.removeEventListener('scroll', this.scrollHandler)
   }
 }
 </script>
