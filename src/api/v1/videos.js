@@ -4,9 +4,9 @@ const redis = require('../../lib/clients/redis')
 const videoGetters = (redis) => {
   return {
     latestUploads: (req, res, next) => {
-      redis.get('latestUploads').then((db_response) => {
-        console.log(db_response)
-        res.send(db_response.data.items)
+      redis.get('latestUploads').then((dbResponse) => {
+        console.log(dbResponse)
+        res.send(dbResponse.data.items)
         next()
       }).catch((err) => {
         console.error(err)

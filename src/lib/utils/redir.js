@@ -2,10 +2,10 @@ const Click = require('../models/Click')
 const liveUrl = require('../../config').LIVE_YOUTUBE_URL
 
 const ExpressRouter = require('express').Router
-const URL = require('url').URL
+
 const redis = require('../clients/redis')
 
-function redirect(res, redirUrl) {
+function redirect (res, redirUrl) {
   if (redirUrl === undefined || redirUrl === null) {
     res.writeHead(301, { Location: '/' })
   } else {

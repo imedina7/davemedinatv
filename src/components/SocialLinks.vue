@@ -12,15 +12,12 @@
 
 <script>
 export default {
-  name: 'SocialLinks',
-  props: {
-    msg: String
-  }
+  name: 'SocialLinks'
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 h3 {
   margin: 40px 0 0;
 }
@@ -32,7 +29,7 @@ ul {
   display: flex;
 }
 li {
-  flex-grow: 1;
+  flex-grow: 3;
 }
 a {
   color: #a7a7a7;
@@ -43,6 +40,7 @@ a:hover {
 }
 div.links {
   width: 100%;
+  transition: all 1s
 }
 div.links ul li > a {
   font-size: 2em;

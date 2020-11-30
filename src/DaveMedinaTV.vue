@@ -1,15 +1,18 @@
 <template>
   <div id="davemedinatv">
-    <StaticLogo class="logo-wrap" aria-label="DaveMedinaTV Logo"/>
-    <SocialLinks />
-    <div v-if="isLive"><a href="/live"><span class="live-sign">LIVE NOW</span></a></div>
+    <Curtain id="curtain"
+      :isLive="this.isLive"
+      :linksStyle="this.linksStyle"
+      :style="this.curtainStyle"
+      :liveUrl="this.liveUrl"/>
+    <Content/>
   </div>
 </template>
 
 <script>
 
-import SocialLinks from './components/SocialLinks.vue'
-import StaticLogo from './components/StaticLogo.vue'
+import Curtain from './components/Curtain.vue'
+import Content from './components/Content.vue'
 
 import axios from 'axios'
 
@@ -17,15 +20,18 @@ export default {
   name: 'DaveMedinaTV',
 
   components: {
-    SocialLinks,
-    StaticLogo
+    Curtain,
+    Content
   },
 
-  props: {
-    isLive: null,
-    liveUrl: null
+  data () {
+    return {
+      isLive: false,
+      liveUrl: null,
+      curtainStyle: 'height: 100%',
+      linksStyle: 'width: 100%'
+    }
   },
-
   methods: {
     getCsrfToken: () => {
       const cookies = document.cookie.split('&')
@@ -49,7 +55,19 @@ export default {
         console.log(err)
       })
     },
+    scrollHandler: function (e) {
+      const offsetY = e.path[1].pageYOffset
+      const heightPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 90 : 90)
+      const widthPercent = 100 - ((offsetY <= 300) ? (offsetY / 300) * 40 : 40)
+      this.curtainStyle = `height: ${heightPercent}%`
+      this.linksStyle = `width: ${widthPercent}%; `
+      if (offsetY >= 250) {
+        this.curtainStyle = `height: ${heightPercent}%; flex-direction: row`
+        this.linksStyle = `width: ${widthPercent}%; justify-content: end`
+      }
+    },
     main: function () {
+      document.addEventListener('scroll', this.scrollHandler)
       this.fetchLiveStatus()
     }
   },
@@ -66,7 +84,10 @@ export default {
 body {
   background-color: #000000;
   font-size: 15px;
+  margin: 0;
+  padding: 0;
 }
+
 #davemedinatv {
   font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -74,21 +95,12 @@ body {
   text-align: center;
   color: #2c3e50;
   margin-top: 0;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column;
+  display:flex
 }
 h1,h2,h3 {
   font-family: 'Doppio One';
 }
-.logo-wrap {
-  width: 100%;
-}
+
 span.live-sign {
   font-family: 'Doppio One';
   padding: 3px 5px;
@@ -103,21 +115,14 @@ span.live-sign {
 @media (min-width: 320px) {
 }
 @media (min-width: 568px) {
-  .logo-wrap {
-    width: 80%;
-  }
+
 }
 @media (min-width: 768px) {
   body {
     font-size: 18px;
   }
-  .logo-wrap {
-    width: 75%;
-  }
 }
 @media (min-width: 1024px) {
-  .logo-wrap {
-    width: 70%;
-  }
+
 }
 </style>
