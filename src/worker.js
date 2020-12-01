@@ -3,6 +3,8 @@
   const ytClient = require('./lib/clients/youtube')
   const redis = require('./lib/clients/redis')
   const envars = require('./config')
+  const constants = require('./lib/utils/constants')
+
   let intervalID = null
 
   const WORKER_INTERVAL_MS = envars.WORKER_INTERVAL_MS
@@ -33,10 +35,36 @@
       logIntervalStatus(intervals, 'hit')
 
       ytClient.getLatestUploads(client).then((latestUploads) => {
-        console.log(latestUploads)
         const lastUpdateDate = new Date()
-        redis.set('latestUploads', { lastUpdate: lastUpdateDate, data: { items: latestUploads } }).then(() => {
+
+        const savedData = {
+          lastUpdate: lastUpdateDate,
+          data: {
+            items: latestUploads
+          }
+        }
+
+        redis.set(constants.playlists.LATEST_UPLOADS, savedData).then(() => {
           console.log('Successfuly saved latest uploads to cache.')
+
+          logIntervalStatus(intervals++, 'end')
+        }).catch(err => {
+          console.error(err)
+        })
+      })
+      ytClient.getChannelPlaylists(client).then(playlists => {
+        const lastUpdateDate = new Date()
+        console.log(playlists)
+        const savedData = {
+          lastUpdate: lastUpdateDate,
+          data: {
+            items: playlists
+          }
+        }
+
+        redis.set(constants.playlists.ALL_PLAYLISTS, savedData).then(() => {
+          console.log('Successfuly saved all playlists to cache.')
+
           logIntervalStatus(intervals++, 'end')
         }).catch(err => {
           console.error(err)

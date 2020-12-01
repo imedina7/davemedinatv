@@ -1,18 +1,34 @@
 const ExpressRouter = require('express').Router
 const redis = require('../../lib/clients/redis')
+const { playlists } = require('../../lib/utils/constants')
 
+const retrieveCachedPlaylist = async (redis, playlistKey) => {
+  if (redis) {
+    const dbResponse = await redis.get(playlistKey)
+    return dbResponse
+  }
+}
 const videoGetters = (redis) => {
   return {
-    latestUploads: (req, res, next) => {
-      redis.get('latestUploads').then((dbResponse) => {
-        console.log(dbResponse)
-        res.send(dbResponse.data.items)
-        next()
-      }).catch((err) => {
-        console.error(err)
+    latestUploads: async (req, res, next) => {
+      try {
+        const playlist = await retrieveCachedPlaylist(redis, playlists.LATEST_UPLOADS)
+        res.send(playlist)
+      } catch {
         res.sendStatus(500)
+      } finally {
         next()
-      })
+      }
+    },
+    playlists: async (req, res, next) => {
+      try {
+        const allPlaylists = await retrieveCachedPlaylist(redis, playlists.ALL_PLAYLISTS)
+        res.send(allPlaylists)
+      } catch {
+        res.sendStatus(500)
+      } finally {
+        next()
+      }
     }
   }
 }
@@ -22,6 +38,7 @@ const VideoRouter = () => {
   redis.initialize()
 
   videoRouter.get('/latestUploads', videoGetters(redis).latestUploads)
+  videoRouter.get('/playlists', videoGetters(redis).playlists)
   return videoRouter
 }
 

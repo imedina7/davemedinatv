@@ -63,14 +63,44 @@ const getLastLivestream = (client) => {
     })
   })
 }
-async function getLatestUploads (client) {
-  const optionsChannel = { part: ['contentDetails'], id: envars.YT_CHANNEL_ID }
+async function getChannel (client, channelID) {
+  const optionsChannel = { part: ['contentDetails'], id: channelID }
   const channels = await client.channels.list(optionsChannel)
-
-  const uploadsPlaylistId = channels.data.items[0].contentDetails.relatedPlaylists.uploads
-
-  const optionsPlaylistItems = { part: ['snippet,contentDetails'], playlistId: uploadsPlaylistId }
+  return channels.data.items[0]
+}
+async function getPlaylistItems (client, playlistID) {
+  const optionsPlaylistItems = { part: ['snippet,contentDetails'], playlistId: playlistID }
   const playlistItems = await client.playlistItems.list(optionsPlaylistItems)
+
+  return playlistItems
+}
+async function getChannelPlaylists (client) {
+  const options = { part: ['snippet,contentDetails'], channelId: envars.YT_CHANNEL_ID }
+  const channelPlaylists = await client.playlists.list(options)
+
+  const playlists = []
+
+  channelPlaylists.data.items.forEach(playlist => {
+    const playlistData = {
+      id: playlist.id,
+      title: playlist.snippet.title,
+      videos: []
+    }
+    playlists.push(playlistData)
+  })
+  for (const playlist of playlists) {
+    const playlistVideos = await getPlaylistItems(client, playlist.id)
+    playlist.videos = playlistVideos.data.items
+  }
+
+  return playlists
+}
+async function getLatestUploads (client) {
+  const channel = await getChannel(client, envars.YT_CHANNEL_ID)
+
+  const uploadsPlaylistId = channel.contentDetails.relatedPlaylists.uploads
+
+  const playlistItems = await getPlaylistItems(client, uploadsPlaylistId)
 
   const uploadsItems = playlistItems.data.items
 
@@ -101,5 +131,6 @@ module.exports = {
   authenticate,
   getLastLivestream,
   getVideos,
-  getLatestUploads
+  getLatestUploads,
+  getChannelPlaylists
 }
